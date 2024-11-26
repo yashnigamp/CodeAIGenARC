@@ -24,7 +24,20 @@ app.post("/api/query", async (req, res) => {
       //   const prompt = "can you convert code from angular to react";
       const { prompt } = req.body;
       console.log(req.body);
-      const result = await model.generateContent(`Hi You are a polygot web developer and you will help me in converting angular code to react code Here is the code given convert it to react code component -${prompt}`);
+      const result = await model.generateContent(`You are an expert code translator specializing in converting Angular components to React. Follow these core principles:
+- Preserve the original component's core logic and structure
+- Use functional components with React hooks
+- Convert Angular template syntax to JSX
+- Simplify and modernize where possible
+- Use TypeScript if the original code uses TypeScript
+- Minimize commentary unless code requires explanation
+
+Input: [${prompt}]
+
+Desired Output:
+1. Full React equivalent component
+2. Brief explanation of key transformations (if significant)
+3. Highlight any potential areas that might need manual review`);
       console.log(result.response.text());
       res.json({ message: result.response.text() });
     };
